@@ -51,13 +51,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 
 app.get("/", (req, res) => res.render("index", { user: req.user }));
-app.get("/sign-up", (req,res) => res.render("sign-up-form"));
+app.get("/signup", (req,res) => res.render('../views/signup'));
 app.get("/log-out", (req, res) => {
     req.logout();
     res.redirect("/");
 });
 
 app.post("/sign-up", (req, res, next) => {
+    check('password').exists(),
+
     bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) return next(err);
         const user = new User({

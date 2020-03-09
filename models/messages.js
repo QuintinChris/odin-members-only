@@ -21,7 +21,7 @@ var MessageSchema = new Schema({
     }
 });
 
-UserSchema.virtual('url').get(function () {
+MessageSchema.virtual('url').get(function () {
     return '/views/message/' + this._id;
 });
 
